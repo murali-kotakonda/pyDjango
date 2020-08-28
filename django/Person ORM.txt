@@ -1,0 +1,138 @@
+
+class Person(models.Model):
+    id=models.IntegerField(primary_key=True)
+    name=models.CharField(max_length=20)
+    age=models.IntegerField()
+    email=models.EmailField()
+    username=models.CharField(max_length=20)
+    password=models.IntegerField()
+    def __str__(self):
+       return self.name
+       
+       
+       
+       create a row
+---------------------------------------------------p
+p= Person(name="mobile",age=12,email="test@y.com",username="adadad",password="adadadad")
+p.save()
+         
+get all persons
+----------------------------------------------
+list=Person.object.all()  ---> list of person objects
+         
+check if name exists:
+----------------------------------------
+e = Person.objects.filter(name ='krishna').exists
+
+if e:
+
+else:
+
+
+get all persons orderby 
+--------------------------------------------------------
+Person.objects.order_by('id')
+Person.objects.order_by(Lower('name').desc())
+Person.objects.order_by(Lower('name').asc())
+
+get only 10
+--------------------------------------------
+Person.objects.all()[:10]
+         
+
+
+get the no of persons
+-------------------------
+count = Person.objects.count()  --> return the int value
+
+
+
+
+get by id
+--------------------------
+pObj = Person.objects.get(id=1)
+ throws exception if id not found
+ 
+get by name:
+myName= request.POST[name]
+pObj = Employee.objects.get(username=myName)
+
+
+get only name and email columns by id
+-----------------------------------------
+list = Person.objects.values('name', 'email')   -> retunrs list of dictionary
+
+[{'name':'kumar','email':'test@y.com'} ,
+{'name':'kumar1','email':'test1@y.com'} 
+]
+
+get perosn whose name is 'kumar'
+------------------------------------------------
+
+         pObj = Person.objects.get(name__exact="Kumar")
+
+
+get details whose name contains kumar
+-------------------------------------------------
+list= Person.objects.get(name__contains="Kumar")
+
+get details whose name contains kumar ignoring the case 
+-------------------------------------------------
+list= Person.objects.get(name__icontains="Kumar")
+
+    
+         
+get details whose name starts with raj
+----------------------------------------------------------------
+list= Person.objects.get(name__startswith="Raj")
+istartswith
+
+get details whose name ends with raj
+----------------------------------------------------------------
+list= Person.objects.get(name__endswith="Raj")
+iendswith
+
+get the persons whose id i 800,100,600
+------------------------------------------------
+list = Person.objects.filter(id__in=[800,100,600])
+         
+              
+get all persons whose sal greater than 100000
+--------------------------------------------------------
+ lst=person.objects.filter(sal__gt=10000)
+         lt
+         lte
+         gte
+         
+         
+ update
+ ---------------------
+pObj = Person.objects.get(id=1)
+pObj.name="samsung"
+pObj.save()
+    
+         
+         
+delete
+---------------------------
+pObj = Person.objects.get(id=1)
+pObj.delete()
+         
+Person.objects.all().delete()  ---> delete all
+
+
+
+check login
+---------------
+
+from django.conttib.auth.models import auth
+
+user = auth.authenticate(username= un , password= pwd)
+if user is not None:
+	auth.login(request,user)
+
+user.isauthenticated
+
+
+         
+         

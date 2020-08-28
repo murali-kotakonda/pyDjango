@@ -1,0 +1,147 @@
+class Employee(models.Model):
+    id = models.AutoField(auto_created = True,primary_key = True)
+    firstName = models.CharField(max_length=30)
+    lastName = models.CharField(max_length=30)
+    age = models.IntegerField(default=-1)
+    username = models.CharField(max_length=30)
+    password = models.CharField(max_length=30)
+    created_date = models.DateTimeField(default=timezone.now)
+
+
+
+#list of Employee objects
+list=Employee.object.all()
+
+#always use 
+l1 = list(Entry.objects.all())
+
+
+# sort by id
+l1 = Employee.objects.order_by('id') 
+
+# desc order  by fname
+l2 =Employee.objects.order_by(Lower('firstName').desc())
+
+# asc order by lname 
+l3 =Employee.objects.order_by(Lower('lastName').asc()) 
+
+#get only 10
+Employee.objects.all()[:10]
+
+
+#get the no of Employees
+noOfEmps = Employee.objects.count()  --> return the int value
+ 
+#get details whose name contains kumar
+list= Employee.objects.get(firstName__contains="Kumar")
+
+#get details whose name contains kumar ignoring the case 
+list= Employee.objects.get(firstName__icontains="Kumar")
+
+ 
+#get details whose name starts with raj
+list= Employee.objects.get(firstName__startswith="Raj")
+
+#get details whose name starts with raj ignore case
+list= Employee.objects.get(firstName__istartswith="Raj")
+
+
+#get details whose name ends with raj
+list= Employee.objects.get(firstName__endswith="Raj")
+
+#get details whose name ends with raj ignore case
+list= Employee.objects.get(firstName__iendswith="Raj")
+
+#get the Employees whose id i 800,100,600
+list = Employee.objects.filter(id__in=[800,100,600])
+         
+#get all Employees whose age greater than 25
+lst=Employee.objects.filter(age__gt=25)
+
+#get all Employees whose age less  than  or equal 25
+lst=Employee.objects.filter(age__lte=25)
+
+#get all Employees whose age greater than 25
+lst=Employee.objects.filter(age__lt=25)
+
+#get all Employees whose age greater than  or equal 25
+lst=Employee.objects.filter(age__gte=25)
+
+#get all Employees whose account is created today
+list = Employee.objects.filter(created_date=datetime.date.today())
+         
+         
+#get employees   by range
+import datetime
+start_date = datetime.date(2005, 1, 1)
+end_date = datetime.date(2005, 3, 31)
+Employee.objects.filter(created_date__range=(start_date, end_date))
+		 
+#get selected columns
+Employee.objects.values('id', 'firstName','lastName')
+<QuerySet [{'id': 1, 'firstName': 'kumar' ,'lastName' : 'ram'}]>		 
+
+#get list of dictionay
+ Employee.objects.values()
+<QuerySet [{'id': 1, 'name': 'Beatles Blog', 'tagline': 'All the latest Beatles news.'}]>
+
+
+#Latest
+Entry.objects.latest('created_date')
+	
+#check if name exists:
+----------------------------------------
+found = Employee.objects.filter(firstName ='krishna').exists()
+(boolean)
+if e:
+
+else:
+
+#get perosn whose name is 'kumar'
+pObj = Employee.objects.get(name__exact="Kumar")
+  
+#login and password check
+eObj = Employee.objects.filter(username=inputUser, pass=inputPass)
+
+
+#get by id
+pObj = Employee.objects.get(id=1)
+ throws exception if id not found
+ 
+#get by name:
+myName= request.POST[name]
+pObj = Employee.objects.get(username=myName)
+
+
+ 
+#Update
+e = Employee.objects.get(id=10)
+e.firstName = "ram kumar"
+e.save()
+
+Employee.objects.filter(id=10).update(firstName="ram kumar")
+       
+         
+delete
+---------------------------
+pObj = Employee.objects.get(id=1)
+pObj.delete()
+         
+Employee.objects.all().delete()  ---> delete all
+
+
+
+check login
+---------------
+
+from django.conttib.auth.models import auth
+
+user = auth.authenticate(username= un , password= pwd)
+if user is not None:
+	auth.login(request,user)
+
+user.isauthenticated
+
+
+         
+         
