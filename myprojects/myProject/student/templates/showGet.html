@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student</title>
+</head>
+<body>
+{% include "studentMenu.html" %}
+<br/>
+<br/>
+{{Student.id}}
+{{Student.firstName}}
+{{Student.lastName}}
+{{Student.age}}
+{{Student.username}}
+<br/>
+<a href="/student/editStudent?id={{Student.id}}">Edit</a>
+</body>
+</html>

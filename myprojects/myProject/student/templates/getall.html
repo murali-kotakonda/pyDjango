@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Student</title>
+   </head>
+
+   <body>
+   {% include "studentMenu.html" %}
+   <table border = "2",width="30%">
+
+        <tr>
+            <th>Id </th>
+            <th>Firstname </th>
+            <th>Lastname </th>
+            <th>Age </th>
+            <th>Username </th>
+            <th>Password </th>
+            <th>Date </th>
+            <th>Action</th>
+        </tr>
+       {% for s in Student %}
+
+          <tr>
+              <li> <td>{{ s.id}} </td>
+                   <td>{{ s.firstName}} </td>
+                   <td>{{ s.lastName}}</td>
+                   <td>{{ s.age}} </td>
+                   <td>{{ s.username}} </td>
+                   <td>{{ s.password}} </td>
+                   <td>{{ s.created_date}} </td>
+                  <td>
+                  <a href="/student/editStudent?id={{s.id}}">Edit</a>
+                  <a href="/student/dltstd?id={{s.id}}">Delete</a>
+                  </td>
+              </li>
+          </tr>
+       {% endfor %}
+   </table>
+   </body>
+

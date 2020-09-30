@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include "index.html" %}
+  Your personal details are: <br/>
+firstname = {{sObj.firstName}}<br/>
+lastname = {{sObj.lastName}}<br/>
+
+
+<br/>
+<br/>
+  Address details:</br>
+hno = {{sObj.addr.hno}}<br/>
+city ={{sObj.addr.city}}<br/>
+state={{sObj.addr.state}}<br/>
+country ={{sObj.addr.country}}<br/>
+Pin ={{sObj.addr.pin}}<br/>
+</body>
+</html>

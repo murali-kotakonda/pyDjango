@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>custmoer</title>
+</head>
+<body>
+ {% include "customerMenu.html" %}
+ <br/> <br/>
+
+ <font color="red"> {{msg}}</font>
+
+		<form action= "/customer/updateEmployee/" method="post">
+             {% csrf_token %}
+	   		<table>
+                 <tr>
+			        <td><label id="deptLbl">Id:</label> </td>
+			        <td><input type="text" name="id"
+					value="{{Employee.id}}" readonly/></td>
+			    </tr>
+
+			     <tr>
+			        <td><label id="deptLbl">Firstname:</label> </td>
+			        <td><input type="text" name="firstname"
+					value="{{Employee.firstName}}"/></td>
+			    </tr>
+                <tr>
+			        <td><label id="deptLbl">Lastname:</label> </td>
+			        <td><input type="text" name="lastname"
+					value="{{Employee.lastName}}"/></td>
+			    </tr>
+                <tr>
+			        <td><label id="deptLbl">Age:</label> </td>
+			        <td><input type="text" name="age"
+					value="{{Employee.age}}"/></td>
+			    </tr>
+                <tr>
+			        <td><label id="deptLbl">Username:</label> </td>
+			        <td><input type="text" name="username"
+					value="{{Employee.username}}"/></td>
+			    </tr>
+
+
+			    <tr>
+			      <td colspan="2">
+			      <input id="submit" type="submit" value="Update"/></td>
+		      </tr>
+			</table>
+		</form>
+
+</body>

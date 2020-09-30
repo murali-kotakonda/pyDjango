@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ {% include "index.html" %}
+<html>
+		<br>
+	 	<h2><label id="addDeptLbl">Add Person</label> </h2>
+		<form action="/login/submit1">
+	   		<table>
+			     <tr>
+			        <td><label id="deptLbl">Name:</label> </td>
+			        <td><input type="text" name="name" /></td>
+			    </tr>
+                <tr>
+			        <td><label id="deptLbl">Age:</label> </td>
+			        <td><input type="text" name="age"/></td>
+			    </tr>
+
+
+			    <tr>
+			      <td colspan="2">
+			      <input id="submit" type="submit" value="Submit"/></td>
+		      </tr>
+			</table>
+		</form>
+        </br>
+
+        </br>
+         <form action= "/login/submit1/" method="post">
+             {% csrf_token %}
+	   		<table>
+			     <tr>
+			        <td><label id="deptLbl">Name:</label> </td>
+			        <td><input type="text" name="name" /></td>
+			    </tr>
+                <tr>
+			        <td><label id="deptLbl">Age</label> </td>
+			        <td><input type="text" name="age"/></td>
+			    </tr>
+
+
+			    <tr>
+			      <td colspan="2">
+			      <input id="submit" type="submit" value="Submit"/></td>
+		      </tr>
+			</table>
+		</form>
+
+</body>
+</html>
+
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include "studentMenu.html" %}
+<br/>
+<br/>
+  {{msg}}<br/> <br/>
+		<form action= "/student/dltstd/" method="post">
+             {% csrf_token %}
+	   		<table>
+			     <tr>
+			        <td><label id="deptLbl">Enter id:</label> </td>
+			        <td><input type="text" name="id" /></td>
+			    </tr>
+                <tr>
+			      <td colspan="2">
+			      <input id="submit" type="submit" value="Delete"/></td>
+		      </tr>
+			</table>
+		</form>
+
+
+
+</body>
+</html>

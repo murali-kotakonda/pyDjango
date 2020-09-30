@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>HTML Table Header</title>
+   </head>
+
+   <body>
+   {% include "index.html" %}
+   <table border = "2",width="30%">
+
+        <tr>
+            <th>Id </th>
+            <th>Name </th>
+            <th>Age </th>
+        </tr>
+       {% for p in persons %}
+
+          <tr>
+              <li> <td>{{ p.id }} </td>
+                <td>{{ p.name }} </td>
+                <td>{{ p.age }}</td>
+              </li>
+          </tr>
+       {% endfor %}
+   </table>
+   </body>
+
+</html>

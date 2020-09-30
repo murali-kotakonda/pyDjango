@@ -1,0 +1,84 @@
+Pip installs:
+----------------------
+pip install Django
+pip install reportlab
+
+
+
+Check PIP version
+pip –version
+
+
+Install python
+pip install Django
+OR
+pip install Django==2.2.3
+
+Result:
+Refer C:\Users\i335484\AppData\Local\Programs\Python\Python37-32\Lib\site-packages
+
+
+check Django version
+django-admin –-version
+
+
+Env changes
+Add C:\Users\i335484\AppData\Local\Programs\Python\Python37-32\Lib\site-packages\django\bin  to env path variable
+
+
+
+Upgrading pip
+    C:\Users\i335484>py -m pip install -U pip
+
+check Django version
+django-admin –version
+
+
+Virtual env:
+Separate for every project.
+pip install virtualenvwrapper-win [ installs the virtual environment. ]
+
+
+
+Create virtual env:
+mkvirtualenv mytest
+
+
+
+(mytest) C:\Users\i335484>pip install django (mytest) C:\Users\i335484>mkdir myprojects
+
+(mytest) C:\Users\i335484>cd myprojects
+(mytest) C:\Users\i335484\myprojects>django-admin startproject myProject
+
+
+(mytest) C:\Users\i335484\myprojects\myProject>python manage.py runserver
+
+C:\Users\i335484\myprojects\myProject>workon mytest
+3.Create app
+(mytest) C:\Users\i335484\myprojects\myProject>python manage.py startapp login
+4.add the app name under the settings.py under INSTALLED_APPS section of project.
+
+
+
+
+Migrate:
+1.python manage.py migrate
+
+Create super User
+2. python manage.py createsuperuser
+
+
+(test) C:\Users\i335484\myprojects\myProject>py manage.py makemigrations
+Migrations for 'login':
+  login\migrations\0001_initial.py
+    - Create model Person
+
+(test) C:\Users\i335484\myprojects\myProject>py manage.py sqlmigrate login 0001
+BEGIN;
+
+(test) C:\Users\i335484\myprojects\myProject>py manage.py sqlmigrate login 0002
+BEGIN;
+
+(test) C:\Users\i335484\myprojects\myProject>py manage.py migrate
+
+

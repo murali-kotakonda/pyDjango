@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>student</title>
+</head>
+<body>
+
+  {{msg}}<br/> <br/>
+		<form action= "/student/loginStudent/" method="post">
+             {% csrf_token %}
+	   		<table>
+
+                <tr>
+			        <td><label id="deptLbl">Username:</label> </td>
+			        <td><input type="text" name="username"
+					value="{{username}}"/></td>
+			    </tr>
+                <tr>
+			        <td><label id="deptLbl">Password:</label> </td>
+			        <td><input type="password" name="password"/></td>
+			    </tr>
+
+
+			    <tr>
+			      <td colspan="2">
+			      <input id="submit" type="submit" value="login"/></td>
+		      </tr>
+			</table>
+		</form>
+
+</body>
+</html>

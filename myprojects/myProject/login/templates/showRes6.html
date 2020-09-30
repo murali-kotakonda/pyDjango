@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>HTML Table </title>
+   </head>
+
+   <body>
+   {% include "index.html" %}
+   <table border = "2",width="30%">
+
+        <tr>
+            <th>FirstName</th>
+            <th>LastName </th>
+            <th>Hno. </th>
+            <th>City </th>
+            <th>State </th>
+            <th>Country </th>
+            <th>Pin </th>
+        </tr>
+       {% for stu in students %}
+
+          <tr>
+              <li> <td>{{stu.firstName}} </td>
+                   <td>{{stu.lastName}} </td>
+                   <td>{{stu.addr.hno }}</td>
+                   <td>{{stu.addr.city }}</td>
+                   <td>{{stu.addr.state }}</td>
+                   <td>{{stu.addr.country }}</td>
+                   <td>{{stu.addr.pin}}</td>
+              </li>
+          </tr>
+       {% endfor %}
+   </table>
+   </body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Person</title>
+   </head>
+
+   <body>
+   {% include "index1.html" %}
+   <table border = "2",width="30%">
+
+        <tr>
+            <th>Id </th>
+            <th>Firstname </th>
+            <th>Lastname </th>
+            <th>Age </th>
+            <th>Email </th>
+            <th>UserName </th>
+            <th>Password </th>
+            <th>Date </th>
+            <th>Action</th>
+        </tr>
+
+          <tr>
+              <li> <td>{{ p.id}} </td>
+                   <td>{{ p.firstName}} </td>
+                   <td>{{ p.lastName}}</td>
+                   <td>{{ p.age}} </td>
+                   <td>{{ p.email}} </td>
+                   <td>{{ p.userName}} </td>
+                   <td>{{ p.password}} </td>
+                   <td>{{ p.created_date}} </td>
+                  <td>
+                  <a href="/register/editPerson?id={{p.id}}">Edit</a>
+
+                  </td>
+              </li>
+          </tr>
+          </table>
+   </body>
+

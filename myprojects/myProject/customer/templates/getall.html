@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>HTML Table Header</title>
+   </head>
+
+   <body>
+   {% include "customerMenu.html" %}
+   <table border = "2",width="30%">
+
+        <tr>
+            <th>Id </th>
+            <th>Firstname </th>
+            <th>Lastname </th>
+            <th>Age </th>
+            <th>Username </th>
+            <th>Password </th>
+            <th>Date </th>
+            <th>Action</th>
+        </tr>
+       {% for e in emps %}
+
+          <tr>
+              <li> <td>{{ e.id}} </td>
+                   <td>{{ e.firstName}} </td>
+                   <td>{{ e.lastName}}</td>
+                   <td>{{ e.age}} </td>
+                   <td>{{ e.username}} </td>
+                   <td>{{ e.password}} </td>
+                   <td>{{ e.created_date}} </td>
+                  <td>
+                  <a href="/customer/editEmployee?id={{e.id}}">Edit</a>
+                  <a href="/customer/dltemp?id={{e.id}}">Delete</a>
+                  </td>
+              </li>
+          </tr>
+       {% endfor %}
+   </table>
+   </body>
+
+</html>

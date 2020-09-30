@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include "index.html" %}
+{% for city in names %}
+      <li>  {{forloop.counter }}   -  {{city}}   </li>
+{% endfor %}
+<br/>
+<br/>
+{% for city in names %}
+      <li>  {{forloop.counter }}   -  {{city}}   - {{forloop.first}}   - {{forloop.last}} </li>
+{% endfor %}
+
+
+</body>
+</html>

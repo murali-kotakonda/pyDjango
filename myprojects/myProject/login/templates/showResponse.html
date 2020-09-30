@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include "index.html" %}
+{{data}}
+
+<br/> <br/>
+{{data|lower}}
+<br/> <br/>
+{{data|upper}}
+<br/>
+{{data|length}}
+
+<br/>
+
+{{p2|default:"No data"}}
+
+<br/>
+{% if data  %}
+  Data exists
+{% else  %}
+	data doesnot exists
+{% endif %}
+
+<br/>
+{% if data == 'admin' %}       > , < != , >= , <=
+	  permission granted
+{% else  %}
+	permission not granted
+{% endif %}
+
+<br/>
+
+{% if data is None %}
+  No value
+
+{% endif %}
+<br/>
+
+{% if data is True %}
+   permission granted
+{% endif %}
+
+<br/>
+
+
+It is {% now "jS F Y H:i" %}
+It is the {% now "jS \o\f F" %}
+<br/>
+
+
+
+</body>
+</html>

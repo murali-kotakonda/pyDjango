@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include "customerMenu.html" %}
+<br/>
+<br/>
+  {{msg}}<br/> <br/>
+		<form action= "/customer/getemp1/" method="post">
+             {% csrf_token %}
+	   		<table>
+			     <tr>
+			        <td><label id="deptLbl">Enter username:</label> </td>
+			        <td><input type="text" name="username"
+					value="{{username}}"/></td>
+			    </tr>
+                <tr>
+			      <td colspan="2">
+			      <input id="submit" type="submit" value="Search"/></td>
+		      </tr>
+			</table>
+		</form>
+
+
+
+</body>
+</html>
