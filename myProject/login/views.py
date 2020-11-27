@@ -19,7 +19,7 @@ class Person:
     age= None
     pancard=None
 
-class Students:
+class StudentInfo:
     firstName = None
     lastName = None
     addr = None
@@ -49,11 +49,21 @@ def process(request):
 
 def handleResponseData(request):
     return render(request, "showResponse.html", {"data":"hi How Are You "})
+#here we are sending the response
+# response param name: data
+# response param value: hi How Are You
+#Response data is deligated to showResponse.html uisng dictionary.
 
 
-def handleResponseKey(request):
-    return render(request, "keyResponse.html", {"name":"hero","id":101,"salary":23900.089})
+
+def handleMultipleResponse(request):
+    responseData = {"name":"hero","id":101,"salary":23900.089}
+    return render(request, "showMultiResponse.html", responseData)
+
+
+#handleShow1 has to send the person object to the "showRes1.html"
 #for one personal object
+
 def handleShow1(request):
     p = Person()
     p.id=2000
@@ -63,9 +73,23 @@ def handleShow1(request):
     return render(request, "showRes1.html", {"pData": p})
 
 #for person with adress object
+"""
+Req:
+Student class is related with Address class using "has a" .
+Student obj internally has address Obj.
+
+send student object from backend to template(html)
+
+steps:
+create Address obj with data
+create StudentInfo obj with data
+keep Address obj inside the StudentInfo obj
+Send StudentInfo obj  to the "showRes2.html".
+showRes2.html :-> print both StudentInfo and Address
+"""
 def handleShow2(request):
     #create student obj
-    stu= Student()
+    stu= StudentInfo()
     stu.firstName="ram"
     stu.lastName="sharma"
 
@@ -83,9 +107,31 @@ def handleShow2(request):
     return render(request, "showRes2.html", {"sObj": stu})
 
 #lists of strings
+"""
+Req:
+Send list of strings to the template.
+
+
+jinja code in python:
+-----------------------
+ use {%   <python code>  %} i html to write the python code.
+ 
+ 
+{{forloop.counter }}   -> to disply the counter
+{{forloop.first}}      -> boolean inform whether element is in 1st position
+{{forloop.last}}  -> boolean inform whether element is in last position
+
+
+{% for city in names %}  -> for starts
+
+{% endfor %}-> for loop ends
+
+No indentation in html
+
+"""
 def handleShow3(request):
     myCities = ["hyd","bangalore","chennai","kolkatta","pune","maduari"]
-    return render(request, "showRes3.html", {"names": myCities})
+    return render(request, "showRes3.html", {"cities": myCities})
 
 #for employee object
 def handleShow4(request):
@@ -102,7 +148,12 @@ def handleShow4(request):
     e.pancard="CND"
     return render(request, "showRes4.html",{"pData": p ,"eData": e})
 
+"""
+Req:
+Send list of Person objs to the template.
 
+handleShow5 has to return the list of person obj to the "showRes5.html" 
+"""
 #lists of persons
 def handleShow5(request):
     p1 = Person()
@@ -115,12 +166,19 @@ def handleShow5(request):
     p2.name = "ram"
     p2.age = 35
 
-    list = []
-    list.append(p1)
-    list.append(p2)
+    list = [p1,p2] # add p1,p2 to the list
     return render(request, "showRes5.html", {"persons": list})
 
+"""
+Req:
+Send list of Student with address objs to the template.
+every Student obj has address obj.
 
+if there are no studnts then display :-> "No students "
+if there is no address for studnt then display :-> "No address available "
+
+
+"""
 #lists of students
 def handleShow6(request):
     stu1 = Student()
@@ -160,6 +218,13 @@ def handleShow6(request):
 def handleIndex(request):
     return render(request, "index.html", )
 
+"""
+Req:
+How to write the if statements in the Html.
+
+if the view sends "1" to the html, then html has to print "SUCCESS"
+if the view sends "0" to the html, then html has to print "FAILURE"
+"""
 #1=sucess or failure
 def handleShow7(request):
     return render(request, "showRes7.html",{"status":0})

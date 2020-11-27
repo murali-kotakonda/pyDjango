@@ -6,14 +6,16 @@
 </head>
 <body>
 {% include "index.html" %}
+
+
 {%  if status == 1  %}
-  SUCCESS
+TRANSACTION SUCCESS
 {% endif %}
 
-
-{%  if status != 1  %}
-  FAILURE
+{%  if status == 0  %}
+TRANSACTION FAIED
 {% endif %}
+
 
 
 </body>

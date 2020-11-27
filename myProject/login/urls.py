@@ -3,20 +3,25 @@ from django.urls import path
 from . import views
 
 
+"""
+# 1st arg is url
+# 2nd arg is function name
+# 3rd arg is alis name for url
+"""
 urlpatterns = [
     path('ex1/', views.ex1,name="ex1 page"),
-    path('hello/', views.handleHello,name="ex1 page"),
-    path('process/', views.process, name="ex1 page"),
-    path('responseData/', views.handleResponseData,name="ex1 page"),
-    path('responseKey/', views.handleResponseKey,name="ex1 page"),
-    path('show1/', views.handleShow1, name="ex1 page"),
-    path('show2/', views.handleShow2, name="show2 page"),
+    path('hello/', views.handleHello,name="ex2 page"),
+    path('process/', views.process, name="ex3 page"),
+    path('responseData/', views.handleResponseData,name=" page"),
+    path('responseMultiData/', views.handleMultipleResponse,name="ex1 page"),
+    path('show1/', views.handleShow1, name="show1-page"),
+    path('show2/', views.handleShow2, name="show2-page"),
     path('show3/', views.handleShow3, name="show3 page"),
     path('show4/', views.handleShow4, name="show4 page"),
     path('show5/', views.handleShow5, name="show5 page"),
     path('show6/', views.handleShow6, name="show6 page"),
     path('', views.handleIndex,name="index page"),
-    path('show7/', views.handleShow7, name="ex1 page"),
+    path('show7/', views.handleShow7, name="IF-page"),
     path('request1/', views.handleRequest1, name="request1 page"),
     path('request2/', views.handleRequest2, name="request2 page"),
     path('submit1/', views.handleSubmit1, name="request1 page"),
