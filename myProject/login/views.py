@@ -229,11 +229,27 @@ if the view sends "0" to the html, then html has to print "FAILURE"
 def handleShow7(request):
     return render(request, "showRes7.html",{"status":0})
 
-#response the input
+"""
+How to capture the request data from the web page.
+
+Req:
+There is a form that has name and age
+customer enters data for name and age
+in the views.py we need to capture the name and age from the request page
+views.py has to send the name , age to the response page.
+
+"""
+#method to show the request page
 def handleRequest1(request):
     return render(request, "request1.html", {"status": 1})
 
 
+#response the input
+def handleRequest11(request):
+    return render(request, "request11.html", {"status": 1})
+
+"""
+handle both post and get
 def handleSubmit1(request):
     if(request.method == 'GET'):
         name= request.GET["name"]
@@ -244,6 +260,37 @@ def handleSubmit1(request):
         name = request.POST["name"]
         age = int(request.POST["age"])
         return render(request, "showRes8.html", {"msg" : "hi from POST " ,"myName": name, "myAge": age})
+"""
+
+
+
+"""
+How to get the request data in th views.py:
+-------------------------------------------------
+req page has below fields:
+------------------------------
+<input type="text" name="name" />
+<input type="text" name="age"/>
+
+To capture name and age in view.py provide below code:
+name= request.GET["name"]  # to get the name
+age = int(request.GET["age"])  # to get the age
+
+the field name should be used in the views.py to capture the request.
+
+"""
+
+#method to handle when data is submitted from request1.html
+def handleSubmit1(request):
+        name= request.GET["name"]
+        age = int(request.GET["age"])
+        return render(request, "showRes8.html", {"msg" : "hi from GET " ,"myName" : name , "myAge" : age})
+
+
+def handleSubmit11(request):
+    name = request.POST["name"]
+    age = int(request.POST["age"])
+    return render(request, "showRes8.html", {"msg": "hi from POST ", "myName": name, "myAge": age})
 
 
 #response the input2
