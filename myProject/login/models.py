@@ -38,6 +38,33 @@ class Emp(models.Model):
     currAddr = models.OneToOneField(Addr, on_delete=models.CASCADE)
 
 #one to many
+"""
+one to many / many to one:
+--------------------------------
+
+one cust has multiple accounts
+
+
+customer:
+------
+id   (PK)
+name
+age
+
+
+account:
+-------------
+id   (PK)
+name
+custid  (FK) refers to id column for customer
+created_date
+
+
+one cust has many accounts----> one to many
+multiple accounts belongsto onecustomer --> many to one
+
+
+"""
 class Customer(models.Model):
    id = models.AutoField(auto_created=True, primary_key=True)
    name = models.CharField(max_length=50)

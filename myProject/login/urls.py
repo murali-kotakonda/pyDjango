@@ -24,24 +24,40 @@ urlpatterns = [
     path('show7/', views.handleShow7, name="IF-page"),
     path('request1/', views.handleRequest1, name="request1-page"),
     path('submit1/', views.handleSubmit1, name="request1 page"),
-    path('request11/', views.handleRequest1, name="request11-page"),
-    path('submit11/', views.handleSubmit11, name="request1 page"),
+
+    path('requestPost/', views.handlePostRequest, name="requestPost-page"),
+    path('submitPost/', views.handleSubmitPost, name="submitPost-page"),
+
+    path('requestGetAndPost/', views.showRequestGetAndPost, name="requestPost-page"),
+    path('submitRequestGetAndPost/', views.handleRequestGetAndPost, name="requestPost-page"),
 
     path('request2/', views.handleRequest2, name="request2 page"),
     path('submit2/', views.handleSubmit2, name="request2 page"),
-    path('request3/', views.handleRequest3, name="request3 page"),
-    path('submit3/', views.handleSubmit3, name="request3 page"),
-    path('register/', views.handleRegister, name="request4 page"),
+
+    path('showLogin/', views.showLogin, name="login-page"),
+    path('submitLogin/', views.handleLogin, name="submit-Login"),
+
+    path('register/', views.handleRegister, name="register-page"),
+    path('register2/', views.handleRegister2, name="register2-page"),
+
     path('reuse/', views.handleReuse, name="reuse page"),
-    path('form1/', views.handleForm1, name="ex2 page"),
+
+    path('form1/', views.handleForm1, name="form1-page"),
     path('processForm1/', views.handleForm2, name="ex2 page"),
-    path('pdf/', views.getpdf, name="ex3 page"),
-    path('csv/', views.getCsv, name="ex3 page"),
-    path('setcookie/', views.handleSetCookie, name="ex3 page"),
-    path('getcookie/', views.handleGetCookie, name="ex3 page"),
+
+
+
+    path('pdf/', views.getpdf, name="pdf-page"),
+    path('csv/', views.getCsv, name="csv-page"),
+
+    path('setcookie/', views.handleSetCookie, name="setcookie-page"),
+    path('getcookie/', views.handleGetCookie, name="getcookie-page"),
+    path('deletecookie/', views.handleDeleteCookie, name="deletecookie-page"),
+
+
     path('person/', views.handlePerson, name="ex3 page"),
-    path('onetoone/', views.handleOnetoone, name="ex3 page"),
-    path('manytoone/', views.handleManytoone, name="ex3 page"),
+    path('onetoone/', views.handleOnetoone, name="onetoone-page"),
+    path('manytoone/', views.handleManytoone, name="manytoone-page"),
     path('manytomany/', views.handleManytomany, name="ex3 page"),
 
 

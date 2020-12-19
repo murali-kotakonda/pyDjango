@@ -1,3 +1,55 @@
+ORM:
+----
+Object Realtionship Model
+
+
+adv:
+----
+simplify the database related logic for create/update/read/delete rows.
+
+djnago has support for ORM.
+with ORM we can reduce the no of lines of code for db layer.
+no need to write the "SQL"
+we have methods for every query related to db.
+
+
+ORM roles:
+--------------
+convert row to object  ( READ queries)
+convert object to row  ( insert/update queries)
+
+
+ex:
+
+steps:
+-----------
+
+1.create model class for every table in the db
+
+DB layer:
+------------
+table name: Person
+columns:
+
+id
+name
+age
+email
+username
+password
+
+in python layer:
+--------------------
+create the model class for the person table
+
+every  model class is the child class for "models.Model".
+
+for 'Number' datatype in table , use models.IntegerField in python
+for 'varchar2' datatype in table , use models.CharField in python
+
+python has additional datatypes
+ex:
+for emial use models.EmailField
 
 class Person(models.Model):
     id=models.IntegerField(primary_key=True)
@@ -8,14 +60,40 @@ class Person(models.Model):
     password=models.IntegerField()
     def __str__(self):
        return self.name
-       
-       
-       
+
+
        create a row
----------------------------------------------------p
-p= Person(name="mobile",age=12,email="test@y.com",username="adadad",password="adadadad")
-p.save()
-         
+---------------------------------------------------
+1.create the model obj with data
+2.call the save method
+
+p= Person(name="kumar",age=12,email="test@y.com",username="kumar1",password="kumar1")
+p.save() # creates single row in person table
+
+
+update
+---------------------
+pObj = Person.objects.get(id=1) # get current data
+pObj.name="raju" # update new data
+pObj.save() # call save method
+
+
+delete by id
+---------------------------
+pObj = Person.objects.get(id=1)
+pObj.delete()
+
+
+delete by name
+---------------------------
+pObj = Person.objects.get(username='kumar')
+pObj.delete()
+
+delete all:
+-----------------
+Person.objects.all().delete()  ---> delete all
+
+
 get all persons
 ----------------------------------------------
 list=Person.object.all()  ---> list of person objects
@@ -46,79 +124,74 @@ get the no of persons
 count = Person.objects.count()  --> return the int value
 
 
-
-
-get by id
---------------------------
-pObj = Person.objects.get(id=1)
+Get by Id:
+----------
+#get the person whose id is '1'
+pObj = Person.objects.get(id=1) # select * from person where id =1
  throws exception if id not found
  
 get by name:
+---------------------
 myName= request.POST[name]
-pObj = Employee.objects.get(username=myName)
+pObj = Employee.objects.get(username='kumar')
 
+get person whose name is 'kumar'
+------------------------------------------------
+pObj = Person.objects.get(username__exact="Kumar")
+
+get details whose name contains kumar
+-------------------------------------------------
+#select * from person where name like '%kumar%'
+list= Person.objects.get(username__contains="Kumar")
+
+get details whose name contains kumar ignoring the case 
+-------------------------------------------------
+list= Person.objects.get(username__icontains="Kumar")
+
+get details whose name starts with raj
+----------------------------------------------------------------
+list= Person.objects.get(username_startswith="Raj")
+list= Person.objects.get(username_istartswith="Raj")  #ignore the case
+
+
+get details whose name ends with raj
+----------------------------------------------------------------
+list= Person.objects.get(username__endswith="Raj")
+list= Person.objects.get(username__iendswith="Raj")#ignore the case
+
+
+get the persons whose id is 800 or 100 or 600
+------------------------------------------------
+list = Person.objects.filter(id__in=[800,100,600])
+         
+              
+get all persons whose age greater than 18
+--------------------------------------------------------
+ lst=person.objects.filter(age__gt=18)
+
+
+get all persons whose age less than 18
+--------------------------------------------------------
+ lst=person.objects.filter(age__lt=18)
+
+ get all persons whose age less than or equal to  18
+--------------------------------------------------------
+ lst=person.objects.filter(age__gte=18)
+
+ get all persons whose age greater than or qual to 18
+--------------------------------------------------------
+ lst=person.objects.filter(age__lte=18)
+
+
+         
 
 get only name and email columns by id
 -----------------------------------------
 list = Person.objects.values('name', 'email')   -> retunrs list of dictionary
 
 [{'name':'kumar','email':'test@y.com'} ,
-{'name':'kumar1','email':'test1@y.com'} 
+{'name':'kumar1','email':'test1@y.com'}
 ]
-
-get perosn whose name is 'kumar'
-------------------------------------------------
-
-         pObj = Person.objects.get(name__exact="Kumar")
-
-
-get details whose name contains kumar
--------------------------------------------------
-list= Person.objects.get(name__contains="Kumar")
-
-get details whose name contains kumar ignoring the case 
--------------------------------------------------
-list= Person.objects.get(name__icontains="Kumar")
-
-    
-         
-get details whose name starts with raj
-----------------------------------------------------------------
-list= Person.objects.get(name__startswith="Raj")
-istartswith
-
-get details whose name ends with raj
-----------------------------------------------------------------
-list= Person.objects.get(name__endswith="Raj")
-iendswith
-
-get the persons whose id i 800,100,600
-------------------------------------------------
-list = Person.objects.filter(id__in=[800,100,600])
-         
-              
-get all persons whose sal greater than 100000
---------------------------------------------------------
- lst=person.objects.filter(sal__gt=10000)
-         lt
-         lte
-         gte
-         
-         
- update
- ---------------------
-pObj = Person.objects.get(id=1)
-pObj.name="samsung"
-pObj.save()
-    
-         
-         
-delete
----------------------------
-pObj = Person.objects.get(id=1)
-pObj.delete()
-         
-Person.objects.all().delete()  ---> delete all
 
 
 

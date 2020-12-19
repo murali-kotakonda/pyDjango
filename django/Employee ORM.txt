@@ -16,13 +16,13 @@ list=Employee.object.all()
 l1 = list(Entry.objects.all())
 
 
-# sort by id
+# get all rows sort by id
 l1 = Employee.objects.order_by('id') 
 
-# desc order  by fname
+# get all rows desc order  by fname
 l2 =Employee.objects.order_by(Lower('firstName').desc())
 
-# asc order by lname 
+# get all rows  asc order by lname
 l3 =Employee.objects.order_by(Lower('lastName').asc()) 
 
 #get only 10
@@ -32,7 +32,7 @@ Employee.objects.all()[:10]
 #get the no of Employees
 noOfEmps = Employee.objects.count()  --> return the int value
  
-#get details whose name contains kumar
+#get details whose name contains raju
 list= Employee.objects.get(firstName__contains="Kumar")
 
 #get details whose name contains kumar ignoring the case 
@@ -102,7 +102,6 @@ pObj = Employee.objects.get(name__exact="Kumar")
   
 #login and password check
 eObj = Employee.objects.filter(username=inputUser, pass=inputPass)
-
 
 #get by id
 pObj = Employee.objects.get(id=1)

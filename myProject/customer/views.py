@@ -49,20 +49,20 @@ def handleCreate1(request):
 #search by ID
 def handleGet(request):
     if (request.method == 'GET'):
-        return render(request, "get.html",{})
-
+        # click on link
+        return render(request, "get.html", {})
     if (request.method == 'POST'):
+        # click on serach button
         MyId = int(request.POST["id"])
-        eObj=None
 
+        # select * from customer where id = <id>
         try:
-         eObj = Employee.objects.get(id=MyId)
-
+            eObj = Employee.objects.get(id=MyId)
         except:
-         return render(request, "get.html", {"msg":"invalid id"})
-
+            return render(request, "get.html", {"msg": "invalid id"})
         else:
-         return render(request, "showGet.html", {"Employee":eObj})
+            return render(request, "showGet.html", {"Employee": eObj})
+
 
 #search by Username
 def handleGet1(request):
@@ -97,11 +97,27 @@ def handleDlt(request):
             return render(request, "get.html", {"msg":"invalid id"})
         else:
             return render(request, "showDlt.html", {"msg" :"delete success"})
+
+"""
+URL rewriting:
+-----------------------
+ <a href="/customer/editEmployee?id={{e.id}}">Edit</a>
+  <a href="/customer/dltemp?id={{e.id}}">Delete</a>
+  
+  along with the url we are appending the data
+  ex: 
+  /editEmployee?id={{e.id}}
+  /dltemp?id={{e.id}
+  
+  what ever that comes after the "?" is the request param info added to the url
+"""
 #get all employee
 def handleGetall(request):
-    if (request.method == 'GET'):
-        list=Employee.objects.all()
-        return render(request, "getall.html", {"emps": list})
+	#select * from customer
+    list=Employee.objects.all()
+    # all rows are converted to emp objects
+    # al emp objs are stored in list
+    return render(request, "getall.html", {"emps": list})
 
 #update by id
 def handleUpdate(request):
@@ -234,6 +250,38 @@ pObj.delete()  # DELETE SINGLE ROW
 Employee.objects.all().delete()  ---> delete all
 """
 
+
+
+"""
+session
+
+
+when to add the session data
+ --------------------------
+ when login is success
+ 
+ when to delete the session data
+ -----------------------------------
+ during the logout
+ 
+ how to add sesison data
+ ----------------------------
+request.session["id"]=e.id
+request.session["fname"] = e.firstName
+request.session["lname"] = e.lastName
+            
+How long is the session data available:
+----------------------------------------------
+till logout or till session is expired
+
+ 
+ how to show the session data in the html:
+ ----------------------------------------------
+  {{request.session.id}}
+ {{request.session.fname}}
+ {{request.session.lname}}
+ 
+"""
 def handleLogin(request):
     if (request.method == 'GET'):
         return render(request, "login.html", {})
@@ -246,7 +294,7 @@ def handleLogin(request):
         try:
             eObj = Employee.objects.filter(username=username,password=password)
         except:
-            return render(request, "login.html", {"msg": "invalid username or password"})
+            return render(request, "customerLogin.html", {"msg": "invalid username or password"})
 
         if (eObj):
             e=eObj.first()
@@ -255,11 +303,12 @@ def handleLogin(request):
             request.session["lname"] = e.lastName
             return render(request, "customerMenu.html", {"msg": "login sucess"})
         else:
-            return render(request, "login.html", {"msg": "invalid username or password"})
+            return render(request, "customerLogin.html", {"msg": "invalid username or password"})
 
-def handleLogout(request):
+def handleEmpLogout(request):
     if (request.method == 'GET'):
+        # delete the session data during the logout
         del request.session["id"]
         del request.session["fname"]
         del request.session["lname"]
-        return render(request, "login.html", {"msg": "logout sucess"})
+        return render(request, "customerLogin.html", {"msg": "logout sucess"})
