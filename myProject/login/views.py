@@ -934,7 +934,7 @@ def handleManytomany(request):
     c1 = Course()
     c1.courseName = "django"
 
-    c1.save()
+   # c1.save()
 
     c1.students.add(s1)
     c1.students.add(s2)

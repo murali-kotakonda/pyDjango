@@ -58,7 +58,7 @@ urlpatterns = [
     path('person/', views.handlePerson, name="ex3 page"),
     path('onetoone/', views.handleOnetoone, name="onetoone-page"),
     path('manytoone/', views.handleManytoone, name="manytoone-page"),
-    path('manytomany/', views.handleManytomany, name="ex3 page"),
+    path('manytomany/', views.handleManytomany, name="manytomany-page"),
 
 
 
