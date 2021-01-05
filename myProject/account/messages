@@ -1,0 +1,32 @@
+from django.contrib import messages
+
+
+@login_required
+def add_messages(request):
+    username = request.user.username
+    messages.add_message(request, messages.INFO, f"Hello {username}")
+    messages.add_message(request, messages.WARNING, "DANGER WILL ROBINSON")
+
+    return HttpResponse("Messages added", content_type="text/plain")
+
+
+ This view adds two messages to the logged-in user’s session, a greeting with the INFO level and an alert with the WARNING level. messages.add_message() takes three parameters:
+
+HttpRequest object
+Message level
+Message
+
+
+show messages:
+-----------------------
+
+
+{% if messages %}
+<ul class="messages" style="background-color:#ccc">
+  {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+      {{ message }}
+    </li>
+  {% endfor %}
+</ul>
+{% endif %}

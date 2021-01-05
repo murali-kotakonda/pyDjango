@@ -5,8 +5,11 @@
     <title>custmoer</title>
 </head>
 <body>
- {% include "customerMenu.html" %}
-  {{msg}}<br/> <br/>
+ <a href="/customer/loginEmployee/">Login employee</a>
+
+ <br/>
+
+  {{msg}}<br/>
 		<form action= "/customer/create/" method="post">
              {% csrf_token %}
 	   		<table>

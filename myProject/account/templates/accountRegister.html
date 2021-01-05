@@ -1,0 +1,15 @@
+
+{% include "accountHome.html" %}
+
+             {% if messages %}
+                 {% for message in messages %}
+                    {{ message }}
+                 {% endfor %}
+            </div>
+            {% endif %}
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form.as_table }}
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>

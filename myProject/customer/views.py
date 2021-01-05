@@ -4,8 +4,14 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Employee
+from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here
+from .permission import is_session_active
+
+
 def handleMenu(request):
     return render(request, "customerMenu.html", {})
 
@@ -14,7 +20,6 @@ def handleCreate(request):
     e = Employee(firstName='ram', lastName='kumar', age=24, username="admin", password="admin")
     e.save()
     return render(request, "showEmployee.html", {"msg": "emp created"})
-
 
 
 def handleCreate1(request):
@@ -47,6 +52,7 @@ def handleCreate1(request):
 
 
 #search by ID
+@is_session_active
 def handleGet(request):
     if (request.method == 'GET'):
         # click on link
@@ -65,6 +71,7 @@ def handleGet(request):
 
 
 #search by Username
+@is_session_active
 def handleGet1(request):
     if (request.method == 'GET'):
         return render(request, "get1.html",{})
@@ -83,6 +90,7 @@ def handleGet1(request):
          return render(request, "showGet.html", {"Employee":eObj})
 
 #delete by ID
+@is_session_active
 def handleDlt(request):
     if (request.method == 'GET'):
         return render(request, "dlt.html",{})
@@ -112,6 +120,7 @@ URL rewriting:
   what ever that comes after the "?" is the request param info added to the url
 """
 #get all employee
+@is_session_active
 def handleGetall(request):
 	#select * from customer
     list=Employee.objects.all()
@@ -120,11 +129,13 @@ def handleGetall(request):
     return render(request, "getall.html", {"emps": list})
 
 #update by id
+@is_session_active
 def handleUpdate(request):
         MyId = int(request.GET["id"])
         eObj = Employee.objects.get(id=MyId)
         return render(request, "update.html", {"Employee":eObj})
 
+@is_session_active
 def handleUpdate1(request):
         #capture the incoming data
         id = request.POST["id"]
@@ -282,9 +293,11 @@ till logout or till session is expired
  {{request.session.lname}}
  
 """
+
 def handleLogin(request):
     if (request.method == 'GET'):
-        return render(request, "login.html", {})
+        return render(request, "customerLogin.html", {})
+
     if (request.method == 'POST'):
         username = request.POST["username"]
         password = request.POST["password"]
@@ -305,6 +318,7 @@ def handleLogin(request):
         else:
             return render(request, "customerLogin.html", {"msg": "invalid username or password"})
 
+@is_session_active
 def handleEmpLogout(request):
     if (request.method == 'GET'):
         # delete the session data during the logout
@@ -312,3 +326,82 @@ def handleEmpLogout(request):
         del request.session["fname"]
         del request.session["lname"]
         return render(request, "customerLogin.html", {"msg": "logout sucess"})
+
+"""
+pagination:
+---------------
+->is required when we have large no of records
+->customer will not see all the records , hence we show the results in page wise.
+->the app has to decide the page size.
+
+ex:
+If there is no pagination
+in one page show all 27 records
+
+
+With pagination
+we have 27 employees
+page 1: show 5 employees  [row 1 to row 5] , offset-0
+page 2: show 5 employees  [row 6 to row 10] ,  offset-5
+page 3: show 5 employees  [row 11 to row 15] , offset-10
+page 4: show 5 employees  [row 16 to row 20] ,  offset-15
+page 5: show 5 employees  [row 21 to row 25] ,  offset-20
+page 6: show 27 employees [row 26 to row 27]  ,  offset-25
+
+limit -> 5
+
+ steps for pagination:
+ ------------------------
+ 1.Get the list using django orm 
+ 2.create paginator object using list and paging size
+ ex:
+   from django.core.paginator import Paginator
+   list = Employee.objects.all()
+   paginator = Paginator(list, 5)  # 5 is the page size
+  
+how to get the no of pages:
+-------------------------------
+pages = paginator.num_pages
+
+
+
+how to check if next link/previous link is available?
+-------------------------------------------
+c1 = paginator.has_previous
+c2 = paginator.has_next
+  
+ 
+How to get the next/previous page numbers:
+---------------------------------------------------
+
+pNo = paginator.previous_page_number
+nNo= paginator.next_page_number
+ 
+
+
+how to get rows for selected page?
+------------------------------------------
+
+paginator = Paginator(Employee.objects.all(), 5)  # 5 is the page size
+resultList = paginator.get_page(1)
+resultList = paginator.get_page(2)
+resultList = paginator.get_page(3)
+resultList = paginator.get_page(4)
+resultList = paginator.get_page(5)
+
+"""
+@is_session_active
+def handlePagination(request):
+    pageNo = request.GET.get('page')
+
+    #get rows and create Paginator obj
+    rows = Employee.objects.all()
+    paginator = Paginator(rows, 5)  # 5 is the page size
+
+    #get rows per page
+    resultList = paginator.get_page(pageNo)
+
+    allPageNos = [i for i in range(1,paginator.num_pages+1) ]
+
+    return render(request, 'paginationList.html', {'resultList': resultList, 'pageNos':allPageNos })
+

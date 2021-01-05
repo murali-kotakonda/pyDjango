@@ -670,22 +670,6 @@ for the text field use forms.CharField
 for the email field use forms.EmailField
 
 
-There 2 situations: using basic Form (forms.Form) and ModelForm (forms.ModelForm).
-
-If you are using a ModelForm then there is no any need of playing with a cleaned_data dictionary 
-because when you do form.save() it is already be matched and the clean data is saved. But you are using basic Form then you have to manually match each cleaned_data to its database place and then save the instance to the database not the form.
-
-For example basic Form:
-
-if form.is_valid():
-    ex = Example()
-    ex.username = form.cleaned_data['username']
-    ex.save()
-For example ModelForm:
-
-if form.is_valid():
-    form.save()
-
 """
 def handleForm2(request):
     if (request.method == 'GET'):
@@ -761,7 +745,6 @@ def getCsv(request):
 
     return response
 
-
 """
 Cookie : HTTP cookies are used to identify specific users and improve your web browsing experience
 cookie info is saved in the local client system and ofen used for client identification.
@@ -773,20 +756,13 @@ How to set the cookies in the response obj in views.py:
 response.set_cookie('MyCookie', 'KRISHNA DJANGO')
 # here 'MyCookie' is cookie name and 'KRISHNA DJANGO' is the cookie value
 
-
-
-
 How to get the cookies from web page?
 -------------------------------------------
 myCookie  = request.COOKIES['MyCookie']
 or
 myCookie  = request.COOKIES.get('MyCookie')
  
-
-
 """
-
-
 # method will set the cookie ad add cookie to response
 def handleSetCookie(request):
     response = HttpResponse("Added cookie")
@@ -900,8 +876,6 @@ def handleOnetoone(request):
     e.save()
     return HttpResponse("one to one success")
 
-
-
 def handleManytoone(request):
     #create  cust obj and save
     c= Customer(name="ramana" , age=34)
@@ -918,7 +892,6 @@ def handleManytoone(request):
     a3.save()
 
     return HttpResponse("one to many/many to one success")
-
 
 def handleManytomany(request):
     s1 = Student()
@@ -941,3 +914,80 @@ def handleManytomany(request):
 
     c1.save()
     return HttpResponse(" many to many success")
+
+"""
+static content:( .css, .images, .js)
+--------------------
+for all the apps we can maintain the static content at a common folder.
+
+steps:
+----------
+1.settings.py:
+-----------------
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+
+2.create the static folder at the roor project:
+- create sub folder "css"
+- create sub folder "img"
+- create sub folder "js"
+
+
+3.in login applocation
+3.a) urls.py:
+---------------
+ path('css/', views.handleCss, name="css-page"),
+ 
+3.b) index.html:
+----------------
+<a href="/login/css">css</a>&nbsp;&nbsp;
+
+3.c) views.py:
+---------------------
+def handleCss(request):
+    return render(request, 'Ex_css.html')
+  
+3.d) Ex_css.html:
+----------------------
+  
+3.e) Under the "css" folder create the style.css file:
+style.css:
+--------------
+   
+ How to include the css file in the html?
+ -----------------------------------------------
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+ 
+ How to include the image file in the html?
+ -----------------------------------------------
+   <img src="{% static 'img/background.jpg' %}" width="100" height="100"/>
+
+"""
+
+def handleCss(request):
+    return render(request, 'Ex_css.html')
+
+"""
+define the block in the base.html
+and the blocm code is provided by the child html
+
+parent1: base.html
+     defines the block
+     
+child1 : reuse1.html
+		provide the code for the block
+    inherits the html code from base.html
+    
+child2 : reuse2.html
+	  provide the code for the block
+    inherits the html code from base.html
+"""
+def handleReuse1(request):
+    return render(request, 'reuse1.html')
+
+def handleReuse2(request):
+    return render(request, 'reuse2.html')
+

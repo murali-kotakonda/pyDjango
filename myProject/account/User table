@@ -1,0 +1,163 @@
+DB
+-------------------
+Inbuild table  : User
+
+columns:
+username
+password
+email
+first_name
+last_name
+
+
+Inbuilt functions:
+-------------------
+-authenticate()
+-login()
+-logout()
+
+authenticate():
+---------------------------------------
+The authenticate() function only verifies whether the credentials provided are valid or not.
+It doesn't login the user.
+
+ login() :
+ -------------------------------
+To login user we use login() function.
+It takes two arguments, request object (HttpRequest) and a User object.
+To login user it saves the user's ID in the session
+
+logout() function:
+---------------------------------------------
+To logout users we use logout() function.
+It accepts a request (HttpRequest) object and returns None.
+
+Calling logout() function completely deletes the session data associated with the logged in user.
+It is important to note that calling logout() function doesn't throw any errors if the user is not logged in.
+The logout() function also removes the cookie from the browser.
+
+
+create 1 row:
+------------------
+>> from django.contrib.auth.models import User
+>>> user = User.objects.create_user('kumar', 'kumar@python.com', 'kumar123')
+
+# At this point, user is a User object that has already been saved
+# to the database. You can continue to change its attributes
+# if you want to change other fields.
+>>> user.last_name = 'Lennon'
+>>> user.save()
+
+
+authenticate:
+-------------------
+
+from django.contrib.auth import authenticate
+inputUserName = "kumar"
+inputPassword= "kumar123"
+
+user = authenticate(username=inputUserName, password=inputPassword)
+if user is not None:
+    # login success
+    login(inputUserName,inputPassword)
+else:
+    # login failure
+
+
+change password:
+----------------------
+from django.contrib.auth.models import User
+inputUserName = "kumar"
+u = User.objects.get(username=inputUserName)
+u.set_password('new password')
+u.save()
+
+
+Get by username:
+------------------
+inputUserName = "kumar"
+user = User.objects.get(username =inputUserName)
+print(user.id,user.username)
+
+
+
+how to find if authenticated:
+---------------------------------
+    if request.user.is_authenticated:
+            return render(request, 'showAccount.html')
+
+what can we access after success login:
+---------------------------------------
+username:     {request.user.username}
+        is_anonymous: {request.user.is_anonymous}
+        is_staff:     {request.user.is_staff}
+        is_superuser: {request.user.is_superuser}
+        is_active:    {request.user.is_active}
+
+
+
+Django allows you to override the default user model by providing a value for the AUTH_USER_MODEL setting that references a custom model:
+
+AUTH_USER_MODEL = 'myapp.MyUser'
+
+Using a custom user model when starting a project¶
+If you’re starting a new project, it’s highly recommended to set up a custom user model, even if the default User model is sufficient for you. This model behaves identically to the default user model, but you’ll be able to customize it in the future if the need arises:
+
+models.py:
+------------------
+from django.contrib.auth.models import AbstractUser
+class User(AbstractUser):
+    pass
+
+
+Don’t forget to point AUTH_USER_MODEL to it. Do this before creating any migrations or running manage.py migrate for the first time.
+
+Also, register the model in the app’s admin.py:
+
+admin.py:
+-------------------
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from .models import User
+admin.site.register(User, UserAdmin)
+
+
+
+
+
+
+
+
+
+Inbuilt login and logout:
+-----------------------------------------------------------------------
+#...
+from . import views
+from django.contrib.auth import views as auth_views
+
+urlpatterns = [
+    url(r'^accounts/login/$', auth_views.login, name='login'),
+    url(r'^accounts/logout/$', auth_views.logout, name='logout'),
+    url(r'^post/add/$', views.post_add, name='post_add'),
+    #...
+]
+By default, Django uses /accounts/login/ and /accounts/logout/ URL for login and logout respectively.
+
+Save the urls.py file and visit http://127.0.0.1:8000/cadmin/accounts/login/. You will get a TemplateDoesNotExist exception as follows:
+We can pass a different template to the django.contrib.auth.login() view using the template_name keyword argument as follows:
+
+url(r'^accounts/login/$',
+    auth_views.login,
+    {'template_name': 'blog/login.html'},
+    name='login'
+)
+Similarly, by default the django.contrib.auth.logout() view uses registration/logged_out.html template from the admin app (django.contrib.admin).
+This is the same template which you would see if you logout from the Django Admin site.
+
+for logout:
+url(r'^accounts/logout/$',
+    auth_views.logout,
+    {'template_name': 'blog/logout.html'},
+    name='logout'
+)
+

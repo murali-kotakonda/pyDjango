@@ -1,0 +1,32 @@
+{% include "accountHome.html" %}
+
+
+            {% if messages %}
+
+                {% for message in messages %}
+                 {{ message }}
+
+                {% endfor %}
+
+            {% endif %}
+
+           <form action="/account/accountLogin/" method="POST">
+                   {% csrf_token %}
+              <table>
+			     <tr>
+			        <td>Username</td>
+                     <td>  <input type="text" class="form-control" name="username" placeholder="Enter Username"></td>
+                 </tr>
+
+                  <tr>
+			        <td>Password</td>
+                     <td>
+                         <input type="password" class="form-control" name="password" placeholder="Password">
+                     </td>
+                 </tr>
+
+              </table>
+               <button type="submit" class="btn btn-primary">Login</button>
+
+            </form>
+

@@ -1,0 +1,7 @@
+Either 'django.db.backends.sqlite3',
+'django.db.backends.postgresql',
+'django.db.backends.mysql', or 'django.db.backends.oracle'.
+
+
+python manage.py dbshell
+python manage.py shell

@@ -55,11 +55,12 @@ urlpatterns = [
     path('deletecookie/', views.handleDeleteCookie, name="deletecookie-page"),
 
 
-    path('person/', views.handlePerson, name="ex3 page"),
+    path('person/', views.handlePerson, name="person-page"),#using model form
     path('onetoone/', views.handleOnetoone, name="onetoone-page"),
     path('manytoone/', views.handleManytoone, name="manytoone-page"),
     path('manytomany/', views.handleManytomany, name="manytomany-page"),
 
-
-
+    path('css/', views.handleCss, name="css-page"),
+    path('reuse1/', views.handleReuse1, name="reuse1"),
+    path('reuse2/', views.handleReuse2, name="reuse2"),
 ]

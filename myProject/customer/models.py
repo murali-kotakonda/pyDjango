@@ -11,5 +11,6 @@ class Employee(models.Model):
     username = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
     created_date = models.DateTimeField(default=timezone.now)
+    #img = models.ImageField(upload_to="images/")
 
 

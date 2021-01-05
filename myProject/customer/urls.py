@@ -14,6 +14,7 @@ urlpatterns = [
     path('updateEmployee/', views.handleUpdate1, name="updateEmployee page"),  # welcome page
     #path('sortEmployee/', views.handleSort, name="index page"),  # welcome page
     path('loginEmployee/', views.handleLogin, name="loginEmployee-page"),  # welcome page
+    path('pagination/', views.handlePagination, name="pagination-page"),
     path('logoutEmployee/', views.handleEmpLogout, name="logout-Employee"),
 
 

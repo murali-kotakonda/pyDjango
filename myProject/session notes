@@ -1,0 +1,31 @@
+Put django.contrib.sessions.middleware.SessionMiddleware in MIDDLEWARE
+and django.contrib.sessions in INSTALLED_APPS of settings.py file.
+
+
+INSTALLED_APPS = [
+
+    'django.contrib.sessions'
+
+    ]
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware'
+    ]
+
+
+    django.contrib.sessions is an application which works on middleware "SessionMiddleware".
+
+    SessionMiddleware is responsible for generating your unique Session IDs.
+    we require django.contrib.sessions application, to store your sessions on the database.
+
+    python manage.py migrate sessions
+
+
+How to see sessions table:
+-------------------------------------------------------
+from django.contrib.admin import ModelAdmin
+from django.contrib.sessions.models import Session
+class SessionAdmin(ModelAdmin):
+    def _session_data(self, obj):
+        return obj.get_decoded()
+    list_display = ['session_key', '_session_data', 'expire_date']
+admin.site.register(Session, SessionAdmin)

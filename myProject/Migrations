@@ -1,0 +1,15 @@
+
+
+(test) C:\Users\i335484\myprojects\myProject>py manage.py makemigrations
+Migrations for 'login':
+  login\migrations\0001_initial.py
+    - Create model Person
+
+(test) C:\Users\i335484\myprojects\myProject>py manage.py sqlmigrate login 0001
+BEGIN;
+
+(test) C:\Users\i335484\myprojects\myProject>py manage.py sqlmigrate login 0002
+BEGIN;
+
+(test) C:\Users\i335484\myprojects\myProject>py manage.py migrate
+

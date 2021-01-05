@@ -1,0 +1,76 @@
+Forms:
+-----
+-> basic form
+-> model form
+
+For every page we are creating the form class
+fr every table we are creating the model class
+
+in the views method:
+--------------------
+1. get the form object
+2. perform clean
+3.convert from from object to model obj
+4.save/update/delete to db
+
+using basic Form:
+if form.is_valid():
+    p = PersonModel(form)
+    p.username = form.cleaned_data['username']
+    p.save()
+
+using ModelForm:
+if form.is_valid():
+    form.save()
+
+
+
+
+
+
+
+
+Django provides a helper class that lets you create a Form class from a Django model.
+
+There 2 situations: using basic Form (forms.Form) and ModelForm (forms.ModelForm).
+
+If you are using a ModelForm then there is no any need of playing with a cleaned_data dictionary
+because when you do form.save() it is already be matched and the clean data is saved.
+
+But you are using basic Form then you have to manually match each cleaned_data to its database place and
+then save the instance to the database not the form.
+
+
+Validation on a ModelForm:
+---------------------------------------------------------------------------
+There are two main steps involved in validating a ModelForm:
+- Validating the form
+- Validating the model instance
+
+Just like normal form validation, model form validation is triggered implicitly when calling is_valid()
+
+[
+or accessing the errors attribute and explicitly when calling full_clean(),
+although you will typically not use the latter method in practice.
+
+Model validation (Model.full_clean()) is triggered from within the form validation step,
+right after the form’s clean() method is called.
+
+]
+Overriding the clean() method:
+---------------------------------------------------
+You can override the clean() method on a model form to provide additional validation in the same way you can on a normal form.
+A model form instance attached to a model object will contain an instance attribute that
+gives its methods access to that specific model instance.
+
+As part of the validation process, ModelForm will call the clean() method of each field on your model
+that has a corresponding field on your form. If you have excluded any model fields,
+validation will not be run on those fields
+
+
+save():
+---------
+Every ModelForm also has a save() method. This method creates and saves a database object from the data bound to the form.
+A subclass of ModelForm can accept an existing model instance as the keyword argument instance;
+if this is supplied, save() will update that instance. If it’s not supplied, save() will create a new instance of the specified model:
+

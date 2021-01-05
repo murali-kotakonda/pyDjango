@@ -4,7 +4,7 @@ from .models import Person
 # import GeeksModel from models.py
 
 
-class PersonForm(forms.ModelForm):
+class PersonForm(forms.):
     # specify the name of model to use
     class Meta:
         model = Person
