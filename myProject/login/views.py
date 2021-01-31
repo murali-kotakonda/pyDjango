@@ -67,11 +67,16 @@ def handleMultipleResponse(request):
 #for one personal object
 
 def handleShow1(request):
+    #create the obj
     p = Person()
+
+    #set data
     p.id=2000
     p.name="kumar"
     p.age=34
     p.pancard="CNVPD2557D"
+
+    #send response to showRes1.html
     return render(request, "showRes1.html", {"pData": p})
 
 #for person with adress object
@@ -218,7 +223,7 @@ def handleShow6(request):
 #index every url
 
 def handleIndex(request):
-    return render(request, "index.html", )
+    return render(request, "index.html" )
 
 """
 Req:
@@ -228,7 +233,7 @@ if the view sends "1" to the html, then html has to print "SUCCESS"
 if the view sends "0" to the html, then html has to print "FAILURE"
 """
 #1=sucess or failure
-def handleShow7(request):
+def handleIf(request):
     return render(request, "showRes7.html",{"status":0})
 
 """
@@ -361,9 +366,8 @@ Every query param is seperated by  &
 For generic data submission use GET call.
 CANNOT USE FOR SENSITIVE DATA SUBMISISON.
 Cannot handle large data. 
-All the link calls aRe get calls
 
-
+All the link calls are get calls
 Button call can be either get or post call
 
 
@@ -373,8 +377,6 @@ EX:  http://127.0.0.1:8000/login/submit1
 For secure data transfer use POST call. 
 Can handle large data.
 File uploads/image  upoad should be done using post calls.
-
-
 
 
 Diff between link and button?
@@ -391,10 +393,9 @@ For a link the navigation is specified using "href" attribute.
 syntax for button:
 Case#2
 <form action= "/login/register/">
-
-
-  <input id="submit" type="submit" value="Login"/></td>
+ <input id="submit" type="submit" value="Login"/></td>
 </form>
+
 If customer clicks on BUTTON then call will hapen as : 
 URL : http://127.0.0.1:8000/login/register/
 HTTP METHOD: GET
@@ -402,9 +403,7 @@ For a button the navigation is specified using <form> action
 
 Case#3
 <form action= "/login/register2/" method="post">
-
-
-  <input id="submit" type="submit" value="Login"/></td>
+ <input id="submit" type="submit" value="Login"/></td>
 </form>
 If customer clicks on BUTTON then call will hapen as : 
 URL : http://127.0.0.1:8000/login/register2/
@@ -452,8 +451,6 @@ branch
 
 -> if validaation is succss -> Data saved
 -> if valdiation is failed->show error message + data retaied using studentForm.html
-
-
 
 """
 def handleSubmit2(request):

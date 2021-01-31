@@ -11,7 +11,7 @@ from . import views
 urlpatterns = [
     path('ex1/', views.ex1,name="ex1 page"),
     path('hello/', views.handleHello,name="ex2 page"),
-    path('process/', views.process, name="ex3 page"),
+    path('process/', views.process, name="process page"),
     path('responseData/', views.handleResponseData,name=" page"),
     path('responseMultiData/', views.handleMultipleResponse,name="ex1 page"),
     path('show1/', views.handleShow1, name="show1-page"),
@@ -21,9 +21,9 @@ urlpatterns = [
     path('show5/', views.handleShow5, name="show5 page"),
     path('show6/', views.handleShow6, name="show6 page"),
     path('', views.handleIndex,name="index page"),
-    path('show7/', views.handleShow7, name="IF-page"),
+    path('show7/', views.handleIf, name="IF-page"),
     path('request1/', views.handleRequest1, name="request1-page"),
-    path('submit1/', views.handleSubmit1, name="request1 page"),
+    path('submit1/', views.handleSubmit1, name="submit1 page"),
 
     path('requestPost/', views.handlePostRequest, name="requestPost-page"),
     path('submitPost/', views.handleSubmitPost, name="submitPost-page"),

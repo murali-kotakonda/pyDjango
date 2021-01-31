@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.response import Response
+
 from .serializers import UserSerializer, GroupSerializer, User1Serializer
 from rest_framework import status
 import json
@@ -38,7 +40,22 @@ def welcome(request):
     return JsonResponse(content)
 
 
+"""
+web service to create the user:
+-----------------------------
 
+URL:<BASE_URL>/rest1/adduser
+HTTP METHOD: post
+request json:
+   {
+            "username": "krishna12",
+            "password": "krishna12",
+            "email": "krishna@y.com",
+            "firstName": "krishna",
+            "lastName": "krishna"
+   }
+
+"""
 @api_view(["GET"])
 @csrf_exempt
 #@permission_classes([IsAuthenticated])
@@ -54,6 +71,16 @@ def get_users(request):
 #@permission_classes([IsAuthenticated])
 def add_user(request):
     payload = json.loads(request.body)
+    """
+     How to get the data from json:
+
+     userName = payload["username"]
+     pwd = payload["password"]
+     email = payload["email"]
+     fN= payload["firstName"]
+     ln = payload["lastName"]
+
+     """
     try:
         user  = User.objects.create_user(
                     username=payload["username"] , password=payload["password"],email=payload["email"], first_name= payload["firstName"] , last_name=payload["lastName"])
@@ -66,3 +93,61 @@ def add_user(request):
     except Exception as ex:
         print("issue",ex)
         return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(["DELETE"])
+@csrf_exempt
+def delete_user(request, userName):
+    try:
+        eObj = User.objects.get(username=userName)
+        eObj.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    except ObjectDoesNotExist as e:
+        return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+    except Exception:
+        return JsonResponse({'error': 'Something went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(["PUT"])
+@csrf_exempt
+#@permission_classes([IsAuthenticated])
+def update_user(request, userName):
+    payload = json.loads(request.body)
+    print(payload)
+    try:
+        eObj = User.objects.get(username=userName)
+        # returns 1 or 0
+        eObj.set_password(payload['password'])
+        eObj.email =payload['email']
+        eObj.first_name = payload['firstName']
+        eObj.last_name = payload['lastName']
+
+        eObj.save()
+        serializer = UserSerializer(eObj, context={
+            'request': request,
+        })
+        return JsonResponse({'response': serializer.data}, safe=False, status=status.HTTP_200_OK)
+    except ObjectDoesNotExist as e:
+        return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
+    except Exception as ex:
+        print(ex)
+        return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(["GET"])
+@csrf_exempt
+# @permission_classes([IsAuthenticated])
+def get_User(request, userName):
+    try:
+        eObj = User.objects.get(username=userName)
+        serializer = UserSerializer(eObj, context={
+            'request': request,
+        })
+        return JsonResponse({'response': serializer.data}, safe=False, status=status.HTTP_200_OK)
+    except ObjectDoesNotExist as e:
+        return JsonResponse({'error': 'Invalid username :' + userName}, safe=False, status=status.HTTP_404_NOT_FOUND)
+    except Exception as ex:
+        return JsonResponse({'error': 'Something terrible went wrong'}, safe=False,
+                            status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+

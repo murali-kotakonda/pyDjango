@@ -10,18 +10,18 @@
    {% include "index.html" %}
    <table border = "2",width="30%">
 
-        <tr>
+        <th>
             <th>Id </th>
             <th>Name </th>
             <th>Age </th>
-        </tr>
+        </th>
        {% for p in persons %}
 
           <tr>
-              <li> <td>{{ p.id }} </td>
+              <td>{{ p.id }} </td>
                 <td>{{ p.name }} </td>
                 <td>{{ p.age }}</td>
-              </li>
+
           </tr>
        {% endfor %}
    </table>

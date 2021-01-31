@@ -89,7 +89,7 @@ while True:
     Entry.objects.bulk_create(batch, batch_size)
 
 
-Most of the time you’ll use all(), get(), filter() and exclude() when you need to look up objects from the database
+Most of the time youï¿½ll use all(), get(), filter() and exclude() when you need to look up objects from the database
  
 
 get all rows 
@@ -256,10 +256,11 @@ misss
 ------------
 Entry.objects.extra(where=["foo='a' OR bar = 'a'", "baz = 'a'"])
 
-SELECT * FROM blog_entry WHERE (foo='a' OR bar='a') AND (baz='a')
+SELECT * FROM empoyee WHERE (id='kumar' OR nmame='kumar') AND (baz='a')
 
 
-
+EntrEmployeey.objects.extra(where=["id='kumar' OR name = 'kumar'"])
+SELECT * FROM Employee WHERE (id='kumar' OR name='kumar') ;
 #Update
 Employee.objects.filter(pub_date__year=2010).update(comments_on=False, headline='This is old')
 

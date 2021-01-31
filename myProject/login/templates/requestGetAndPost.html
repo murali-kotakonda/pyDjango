@@ -9,7 +9,7 @@
 
 		<br>
 	 	<h2><label id="addDeptLbl">Add Person</label> </h2>
-		<form action="/login/submit1">
+		<form action="/login/submitRequestGetAndPost">
 	   		<table>
 			     <tr>
 			        <td><label id="deptLbl">Name:</label> </td>
@@ -29,7 +29,7 @@
 		</form>
         </br></br></br></br></br></br></br>
 
-        <form action= "/login/submitPost/" method="post">
+        <form action= "/login/submitRequestGetAndPost/" method="post">
              {% csrf_token %}
 	   		<table>
 			     <tr>

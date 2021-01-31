@@ -3,11 +3,17 @@ DB
 Inbuild table  : User
 
 columns:
+
+
+
+properties:
+-----------------------
 username
 password
 email
 first_name
 last_name
+
 
 
 Inbuilt functions:
@@ -72,6 +78,17 @@ u = User.objects.get(username=inputUserName)
 u.set_password('new password')
 u.save()
 
+
+chnage other proops:
+------------------
+inputUserName = "kumar"
+u = User.objects.get(username=inputUserName)
+
+u.set_password(payload['password'])
+u.email =payload['email']
+u.first_name = payload['firstName']
+u.last_name = payload['lastName']
+u.save()
 
 Get by username:
 ------------------
