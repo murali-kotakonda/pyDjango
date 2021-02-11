@@ -45,8 +45,6 @@ urlpatterns = [
     path('form1/', views.handleForm1, name="form1-page"),
     path('processForm1/', views.handleForm2, name="ex2 page"),
 
-
-
     path('pdf/', views.getpdf, name="pdf-page"),
     path('csv/', views.getCsv, name="csv-page"),
 

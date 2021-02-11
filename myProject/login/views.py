@@ -634,7 +634,7 @@ def handleReuse(request):
 
 """
 -> it is often difficult to capture the request data when we have multiple incoming data.
-ex: if the formhas 20 fields , then we nee dto write 20 line sof code for requets capturing.
+ex: if the formhas 20 fields , then we nee dto write 20 line sof code for requests capturing.
 
 problem:
 code repeation
@@ -651,7 +651,7 @@ Requirement:
 and perform Request capturing.
 
 
-the  following code  in the form1.html generates the form automatically.
+use the  following code  in the form1.html to generates the form automatically.
 - {{ form }}
 - {{ form.as_table}}
 - {{ form.as_p}}
