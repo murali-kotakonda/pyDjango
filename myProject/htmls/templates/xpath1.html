@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script>
+function f1() {
+  document.getElementById("dynamicData").innerHTML =  "RESET selected";
+}
+
+function f2() {
+	  document.getElementById("dynamicData").innerHTML =   "ADD selected";
+	}
+</script>
+
+</head>
+<body>
+
+<label  style="color:red">TEST XPATH</label> <br/><br/>
+
+<a href="https://www.gmail.com">click here</a>  <br/>
+<a href="https://www.fb.com">click here</a>  <br/>
+
+<br/>
+
+<label id='error'>Enter values here</label>  <br/>
+ Enter name : <input id='error' type="text"/><br/><br/>
+ 
+ 
+ <input type="button" value="RESET" onclick="f1()"/><br/><br/>
+ <input type="button" value="ADD" onclick="f2()"/><br/>
+ 
+  <p id="dynamicData"></p>
+ 
+<br/><br/>
+
+ Enter password :
+<input type="password" name="password"/>
+
+<br/><br/>
+
+<p class="show"> Hello1 </p>
+<p class="show"> Hello2 </p>
+<p class="show"> Hello3  </p>
+<p class="show"> Hello4  </p>
+
+<br/><br/> 
+		
+</body>
+</html>

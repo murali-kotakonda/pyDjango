@@ -1,0 +1,213 @@
+<html>
+    <head>
+        
+        <title>Learn Forms in HTML with CSS</title>
+        
+     <!--   <link rel="stylesheet" type="text/css" href="style.css"/> -->
+     
+
+<style type="text/css">
+label {
+    font-size: 16px;
+    color: #111111;
+}
+
+input, textarea, select {
+    background-color: antiquewhite;
+}
+
+fieldset {
+    border: 0px;
+    padding: 20px;
+    background-color: #EEFFFF;
+}
+
+ul {
+    background-color: #EEFFEE;
+}
+
+li {
+    color: #666666;
+}
+
+</style>     
+
+        <!--
+        
+        CSS Selectors
+        ~~~~~~~~~~~~~~~
+        $$("<tag name>")
+		$$("<tagName>[<attributeName>='<value>']")
+
+        
+        1.Get all web elements that has input as tag name
+        $$("input")
+        
+        (10) [input#first-name, input#password, input, input, input, input, input, input, input, input]0: input#first-name1: input#password2: input3: input4: input5: input6: input7: input8: input9: inputlength: 10__proto__: Array(0)
+        
+        2.Get all web elements that has input as tag name and type as password
+        $$("input[type='password']")
+        [input#password]0: input#passwordlength: 1__proto__: Array(0)
+        
+        3.Get all web elements that has input as tag name and type as text
+        $$("input[type='text']")
+        [input#first-name]0: input#first-namelength: 1__proto__: Array(0)
+        
+        4.Get all web elements that has input as tag name and type as number
+        $$("input[type='number']")
+        [input]
+        
+        5.Get all web elements that has input as tag name and type as radio
+        $$("input[type='radio']")
+        (4) [input, input, input, input]0: input1: input2: input3: inputlength: 4__proto__: Array(0)
+        
+        6.Get all the labels
+        $$("label")
+        (8) [label, label, label#update-profile-label, label, label, label, label, label]
+        
+       
+       7.Get all li tags
+        $$("li")
+        (5) [li, li, li, li, li]
+        
+        8.Get all the dropdowns
+        $$("select")
+        [select]
+        
+        9.Get the options
+        $$("option")
+        (4) [option, option, option, option]0: 
+        
+        10.get the input type checkbox
+        $$("input[type='checkbox']")
+        [input]
+     
+     	$$("input[value='HTML']")
+        [input]0: inputlength: 1__proto__: Array(0)
+       
+       
+        XPath Selectors
+        ~~~~~~~~~~~~~~~
+       
+		1.Get all web elements that has input as tag name
+ 		$x("//input")
+        (10) [input#first-name, input#password, input, input, input, input, input, input, input, input]
+        
+        
+		2.Get all web elements that has input as tag name and type as text
+        $x("//input[@type='text']")
+        [input#first-name]
+        
+        3.Get all web elements that has input as tag name and type as checkbox
+        $x("//input[@type='checkbox']")
+        [input]
+        
+        4.Get all passwords
+        $x("//input[@type='password']")
+        [input#password]
+        
+        5.Get input field that has id as password  
+        $x("//input[@id='password']")
+        [input#password]
+        
+        
+        6.Get input field that has id as first-name  
+        $x("//input[@id='first-name']")
+        [input#first-name]
+        
+        7.Get all the labels
+        $x("//label")
+        (8) [label, label, label#update-profile-label, label, label, label, label, label]
+       
+        8.Get all the textarea
+        $x("//textarea")
+        [textarea]
+       
+        9.Get the input that has type as number
+          $x("//input[type='number']")
+          []
+       
+       10.Get the input that has type as radio or get all radio buttons
+        $x("//input[@type='radio']")
+        (4) [input, input, input, input]
+       
+       11.Get all the dropdowns
+        $x("//select")
+        [select]
+      
+      12.Get the options in a drop down
+        $x("//option")
+        (4) [option, option, option, option]
+       
+       13.get all elements that has id as firstname
+        $x("//*[@id='first-name']")
+        [input#first-name]
+        -->
+        
+    </head>
+    
+    <body>
+        Let's get some data from the user:
+        
+        <ul>
+            <li>Text</li>
+            <li>Lot of Text - in multiple lines</li>
+            <li>Select among options</li>
+            <li>Yes or No</li>
+            <li>Click a Button</li>
+        </ul>
+
+        <form method="post" action="accept-information.do">
+            
+            <fieldset>
+                <label >First Name</label>
+                <input type="text" name="first-name"  id="first-name" size="15" maxlength="20" value="Ranga"/>
+
+                <label>Password</label>
+                <input type="password"  id="password" name="password"/>            
+            </fieldset>
+            <!--style="font-size: 25px"-->
+            
+            <fieldset>
+                <label id="update-profile-label">Upload Profile Picture</label>
+                <input type="file" name="profile-picture"/>
+            </fieldset>
+            
+            <fieldset>
+                <label>Age</label>
+                <input type="number" name="age" value="20"/>
+                <label>Describe Yourselves</label>
+                <textarea name="description" rows="5" cols="100"></textarea>
+            </fieldset>
+        
+            <fieldset>
+                <label>What do you want to learn?</label>
+                <input type="radio" name="what-to-learn" value="HTML">HTML
+                <input type="radio" name="what-to-learn" value="CSS" checked>CSS
+                <input type="radio" name="what-to-learn" value="AUT">Automation Testing
+                <input type="radio" name="what-to-learn" value="JAVA">Java
+            </fieldset>
+                
+            <fieldset>
+            <label>How do you want to Learn?</label>
+            <select name="how-to-learn" multiple>
+                <option value="online">Online</option>
+                <option value="books">Books</option>
+                <option value="college" selected>College</option>
+                <option value="other">Other</option>
+            </select>
+            </fieldset>
+            
+            <fieldset>
+                <input type="checkbox" name="drive" checked/>
+                <label>Do You Know to Drive?</label>
+            </fieldset>
+            
+            <fieldset>
+                <input type="submit" />
+            </fieldset>
+        </form>
+        
+        
+    </body>
+</html>

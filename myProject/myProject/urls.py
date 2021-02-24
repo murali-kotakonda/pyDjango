@@ -5,10 +5,11 @@ urlpatterns = [
 
 
     path('admin/', admin.site.urls),
-    path('login/', include('login.urls')),
+    #path('login/', include('login.urls')),
     # path(r'^login/$', include('login.urls')),
-    path('customer/', include('customer.urls')),
-    path('account/', include('account.urls'))
+    #path('customer/', include('customer.urls')),
+    #path('account/', include('account.urls')),
+    path('htmls/', include('htmls.urls')),
     #path('student/', include('student.urls'))
 
 ]

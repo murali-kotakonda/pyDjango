@@ -1,0 +1,37 @@
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Home Page</title>
+
+<script>
+function check1(){
+	alert("Hello");
+	return true;
+}
+
+function check2(){
+	if(confirm("do you want to continue?")){
+		window.location="https://www.google.com"
+	}else{
+		window.location="https://www.gmail.com"
+	}
+}
+
+function check3(){
+	txt = prompt("enter page")
+	if(txt !="" && txt != null)
+		window.location=txt
+}
+</script>
+
+</head>
+<body>
+ 
+<input type="button" name="alert1" onclick="check1()" value="alert1"><br><br>
+<input type="button" name="alert2" onclick="check2()" value="alert2"><br><br>
+<input type="button" name="alert3" onclick="check3()" value="alert3"><br><br>
+
+
+
+</body>
+</html>

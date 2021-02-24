@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<script>
+function bigImg(x) {
+  x.style.height = "64px";
+  x.style.width = "64px";
+}
+
+function normalImg(x) {
+  x.style.height = "32px";
+  x.style.width = "32px";
+}
+</script>
+
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("p").mouseover(function(){
+    $("p").css("background-color", "yellow");
+  });
+  $("p").mouseout(function(){
+    $("p").css("background-color", "lightgray");
+  });
+});
+</script>
+
+</head>
+<body>
+
+<img onmouseover="bigImg(this)" onmouseout="normalImg(this)" border="0" src="mypic.jpg" alt="Smiley" width="32" height="32">
+
+
+<br/><br/>
+<p id="mylabel">Move the mouse pointer over this paragraph.</p>
+
+enter name :
+<input type="text" name="name" />
+
+<br/><br/>
+
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+Enter the data :  <input type="text" id="data" />
+
+
+</body>
+</html>
