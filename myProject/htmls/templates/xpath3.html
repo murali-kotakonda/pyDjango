@@ -42,9 +42,20 @@ li {
         
         1.Get all web elements that has input as tag name
         $$("input")
-        
-        (10) [input#first-name, input#password, input, input, input, input, input, input, input, input]0: input#first-name1: input#password2: input3: input4: input5: input6: input7: input8: input9: inputlength: 10__proto__: Array(0)
-        
+         (10) [input#first-name, input#password, input, input, input, input, input, input, input, input]0: input#first-name1: input#password2: input3: input4: input5: input6: input7: input8: input9: inputlength: 10__proto__: Array(0)
+
+
+        -Get all checkbox
+             $$("input[type='checkbox']")
+
+        -Get all radio buttons
+            $$("input[type='radio']")
+
+        -Get all passwords
+            $$("input[type='password']")
+
+
+
         2.Get all web elements that has input as tag name and type as password
         $$("input[type='password']")
         [input#password]0: input#passwordlength: 1__proto__: Array(0)
@@ -97,6 +108,9 @@ li {
 		2.Get all web elements that has input as tag name and type as text
         $x("//input[@type='text']")
         [input#first-name]
+
+        $x("//input[@type='radio']")
+
         
         3.Get all web elements that has input as tag name and type as checkbox
         $x("//input[@type='checkbox']")
