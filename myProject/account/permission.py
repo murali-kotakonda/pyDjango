@@ -12,7 +12,17 @@ def user_email_valid(function):
 
     return wrap
 
+def is_Age_Valid(function):
 
+    def wrap(request, *args, **kwargs):
+
+        age = int(request.session["age"])
+        if age>=18 :
+            return function(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+
+    return wrap
 
 def user_is_employee(function):
 

@@ -102,7 +102,7 @@ def handleDlt(request):
             eObj = Employee.objects.get(id=MyId)
             eObj.delete()
         except:
-            return render(request, "get.html", {"msg":"invalid id"})
+            return render(request, "dlt.html", {"msg":"invalid id"})
         else:
             return render(request, "showDlt.html", {"msg" :"delete success"})
 
@@ -124,6 +124,7 @@ URL rewriting:
 def handleGetall(request):
 	#select * from customer
     list=Employee.objects.all()
+    print(type(list))
     # all rows are converted to emp objects
     # al emp objs are stored in list
     return render(request, "getall.html", {"emps": list})
@@ -167,7 +168,7 @@ def handleUpdate1(request):
 
 
 """def handleSort(request):
-    (request.method == 'GET')
+    if(request.method == 'GET')
         list = Employee.object.all()
        
         l1 = Employee.objects.order_by('id') // sort by id
@@ -266,32 +267,64 @@ Employee.objects.all().delete()  ---> delete all
 """
 session
 
+http is a stateless protocal.
+backend will not remeber or identify client
+
+What are diff ways for identifying client/session tracing?
+->url rewriting
+->hidden form fileds
+->cookies
+->session
 
 when to add the session data
- --------------------------
+--------------------------
  when login is success
  
- when to delete the session data
- -----------------------------------
- during the logout
+when to delete the session data
+-----------------------------------
+ during the logout or session is expired
  
- how to add sesison data
- ----------------------------
+
+what data should we keep in session:
+---------------------------------------
+non sensitive data
+frequently used data
+identifiers
+ 
+how to add session data
+----------------------------
 request.session["id"]=e.id
 request.session["fname"] = e.firstName
 request.session["lname"] = e.lastName
+
+this data is available till you logout or session is expired.
+
             
 How long is the session data available:
 ----------------------------------------------
 till logout or till session is expired
 
+
+how to read session data
+[get session data from any page]
+----------------------------
+id = request.session["id"]
+fName = request.session["fname"]  
+lName = request.session["lname"] 
+
+
  
- how to show the session data in the html:
- ----------------------------------------------
-  {{request.session.id}}
- {{request.session.fname}}
- {{request.session.lname}}
+how to show the session data in the html:
+--------------------------------------------
+{{request.session.id}}
+{{request.session.fname}}
+{{request.session.lname}}
  
+ 
+how to check if session is active or not:
+----------------------------------------------
+userId = request.session["id"]
+
 """
 
 def handleLogin(request):
@@ -311,6 +344,7 @@ def handleLogin(request):
 
         if (eObj):
             e=eObj.first()
+            #keep session data as login is success
             request.session["id"]=e.id
             request.session["fname"] = e.firstName
             request.session["lname"] = e.lastName
@@ -335,23 +369,24 @@ pagination:
 ->the app has to decide the page size.
 
 ex:
+assume we have 27 employees
+
 If there is no pagination
 in one page show all 27 records
 
 
-With pagination
-we have 27 employees
+With pagination , assume page size is 5 ,limit -> 5
 page 1: show 5 employees  [row 1 to row 5] , offset-0
 page 2: show 5 employees  [row 6 to row 10] ,  offset-5
 page 3: show 5 employees  [row 11 to row 15] , offset-10
 page 4: show 5 employees  [row 16 to row 20] ,  offset-15
 page 5: show 5 employees  [row 21 to row 25] ,  offset-20
-page 6: show 27 employees [row 26 to row 27]  ,  offset-25
+page 6: show 2 employees [row 26 to row 27]  ,  offset-25
 
-limit -> 5
 
- steps for pagination:
- ------------------------
+
+steps for pagination:
+------------------------
  1.Get the list using django orm 
  2.create paginator object using list and paging size
  ex:
@@ -359,10 +394,10 @@ limit -> 5
    list = Employee.objects.all()
    paginator = Paginator(list, 5)  # 5 is the page size
   
+  
 how to get the no of pages:
 -------------------------------
 pages = paginator.num_pages
-
 
 
 how to check if next link/previous link is available?
@@ -381,21 +416,22 @@ nNo= paginator.next_page_number
 
 how to get rows for selected page?
 ------------------------------------------
-
 paginator = Paginator(Employee.objects.all(), 5)  # 5 is the page size
-resultList = paginator.get_page(1)
-resultList = paginator.get_page(2)
-resultList = paginator.get_page(3)
-resultList = paginator.get_page(4)
-resultList = paginator.get_page(5)
+resultList = paginator.get_page(1) #get the records for page1
+resultList = paginator.get_page(2) #get the records for page2
+resultList = paginator.get_page(3) #get the records for page3
+resultList = paginator.get_page(4) #get the records for page4
+resultList = paginator.get_page(5)#get the records for page5
 
 """
 @is_session_active
 def handlePagination(request):
     pageNo = request.GET.get('page')
 
-    #get rows and create Paginator obj
+    #get rows from db
     rows = Employee.objects.all()
+
+    #get paginator object
     paginator = Paginator(rows, 5)  # 5 is the page size
 
     #get rows per page

@@ -31,15 +31,17 @@ DB layer:
 table name: Person
 columns:
 
-id
-name
-age
-email
-username
-password
+id number
+name varchar2
+age number
+email varchar2
+username varchar2
+password varchar2
 
 in python layer:
 --------------------
+for every db table we need to create the model class.
+
 create the model class for the person table
 
 every  model class is the child class for "models.Model".
@@ -49,7 +51,7 @@ for 'varchar2' datatype in table , use models.CharField in python
 
 python has additional datatypes
 ex:
-for emial use models.EmailField
+for email use models.EmailField
 
 class Person(models.Model):
     id=models.IntegerField(primary_key=True)
@@ -62,7 +64,7 @@ class Person(models.Model):
        return self.name
 
 
-       create a row
+save a row
 ---------------------------------------------------
 1.create the model obj with data
 2.call the save method
@@ -71,23 +73,30 @@ p= Person(name="kumar",age=12,email="test@y.com",username="kumar1",password="kum
 p.save() # creates single row in person table
 
 
-update
+How to get person  whose id is 1
 ---------------------
 pObj = Person.objects.get(id=1) # get current data
-pObj.name="raju" # update new data
-pObj.save() # call save method
 
 
-delete by id
+
+delete by id (id=1)
 ---------------------------
 pObj = Person.objects.get(id=1)
 pObj.delete()
 
 
-delete by name
+delete by name (name= 'kumar')
 ---------------------------
 pObj = Person.objects.get(username='kumar')
 pObj.delete()
+
+
+update existing row whose id is 1
+---------------------
+pObj = Person.objects.get(id=1) # get current data
+pObj.name="raju" # update new data
+pObj.save() # call save method
+
 
 delete all:
 -----------------
@@ -103,17 +112,24 @@ check if name exists:
 e = Person.objects.filter(name ='krishna').exists
 
 if e:
-
+   print("krishna exist")
 else:
+   print("name krishna not found")
 
-
-get all persons orderby 
+get all persons orderby  id
 --------------------------------------------------------
 Person.objects.order_by('id')
-Person.objects.order_by(Lower('name').desc())
+
+get all persons orderby  name asc
+--------------------------------------------------------
 Person.objects.order_by(Lower('name').asc())
 
-get only 10
+get all persons orderby  name asc
+--------------------------------------------------------
+Person.objects.order_by(Lower('name').desc())
+
+
+get only 10 rows
 --------------------------------------------
 Person.objects.all()[:10]
          
@@ -128,12 +144,12 @@ Get by Id:
 ----------
 #get the person whose id is '1'
 pObj = Person.objects.get(id=1) # select * from person where id =1
- throws exception if id not found
+throws exception if id not found
  
 get by name:
 ---------------------
 myName= request.POST[name]
-pObj = Employee.objects.get(username='kumar')
+pObj = Employee.objects.get(username=myName)
 
 get person whose name is 'kumar'
 ------------------------------------------------
@@ -151,13 +167,13 @@ list= Person.objects.get(username__icontains="Kumar")
 get details whose name starts with raj
 ----------------------------------------------------------------
 list= Person.objects.get(username_startswith="Raj")
-list= Person.objects.get(username_istartswith="Raj")  #ignore the case
+list= Person.objects.get(username_istartswith="RAJ")  #ignore the case
 
 
 get details whose name ends with raj
 ----------------------------------------------------------------
 list= Person.objects.get(username__endswith="Raj")
-list= Person.objects.get(username__iendswith="Raj")#ignore the case
+list= Person.objects.get(username__iendswith="RAJ")#ignore the case
 
 
 get the persons whose id is 800 or 100 or 600
@@ -176,16 +192,16 @@ get all persons whose age less than 18
 
  get all persons whose age less than or equal to  18
 --------------------------------------------------------
- lst=person.objects.filter(age__gte=18)
+ lst=person.objects.filter(age__lte=18)
 
  get all persons whose age greater than or qual to 18
 --------------------------------------------------------
- lst=person.objects.filter(age__lte=18)
+ lst=person.objects.filter(age__gte=18)
 
 
          
 
-get only name and email columns by id
+get only name and email columns
 -----------------------------------------
 list = Person.objects.values('name', 'email')   -> retunrs list of dictionary
 

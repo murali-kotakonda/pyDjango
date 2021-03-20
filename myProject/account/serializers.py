@@ -15,7 +15,6 @@ class User1Serializer(serializers.ModelSerializer):
 
 
 
-
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group

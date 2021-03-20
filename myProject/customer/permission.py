@@ -9,9 +9,9 @@ def is_session_active(function):
             if userId:
                 return function(request, *args, **kwargs)
             else:
-                return render(request, "customerLogin.html", {"msg": "session closed"})
+                return render(request, "customerLogin.html", {"msg": "session closed.Please login again"})
         except Exception:
-            return render(request, "customerLogin.html", {"msg": "session closed"})
+            return render(request, "customerLogin.html", {"msg": "session closed.Please login again"})
 
 
     return wrap

@@ -1,4 +1,18 @@
 pip install djangorestframework
+pip install markdown       # Markdown support for the browsable API.
+pip install django-filter  # Filtering support
+pip freeze > requirements.txt
+
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+]
+
+
+
+
+pip install djangorestframework
+
 
 settings.py:
 --------------
@@ -59,7 +73,6 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
-
 
 
 serializers.py:

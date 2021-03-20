@@ -5,7 +5,7 @@
     <title>Customer</title>
 </head>
 <body>
-welcome {{request.session.fname}}
+Welcome {{request.session.fname}} ,{{request.session.lname}}
 <br/>
 
 <a href="/customer/getall/">Get All Emps</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -13,7 +13,7 @@ welcome {{request.session.fname}}
 <a href="/customer/getemp1/">Get Employee by name</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="/customer/dltemp/">Delete Employee</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="/customer/sortemp/">Sort Employee</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="/customer/pagination">pagination</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="/customer/pagination?page=1">pagination</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="/customer/logoutEmployee/">Logout Employee</a>&nbsp;&nbsp;&nbsp;&nbsp;
 </body>
 
